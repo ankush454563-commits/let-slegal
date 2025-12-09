@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "admin-panel/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/admin-panel/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/admin-panel/$1"
+    }
+  ]
+}
