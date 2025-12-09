@@ -26,35 +26,18 @@ const seedData = async () => {
     // Create sample services
     const services = [
       {
-        name: 'Legal Consultation',
-        description: 'Get expert legal advice from experienced lawyers for your business or personal matters.',
-        category: 'Legal Consultation',
-        price: 1999,
-        estimatedDuration: '1-2 days',
-        features: [
-          'One-on-one consultation with lawyer',
-          'Case analysis and legal opinion',
-          'Personalized legal advice',
-          'Follow-up support'
-        ],
-        requiredDocuments: [
-          'ID Proof',
-          'Relevant case documents',
-          'Previous legal correspondence (if any)'
-        ],
-        isActive: true
-      },
-      {
-        name: 'Company Registration',
-        description: 'Complete assistance for private limited company, LLP, or partnership firm registration.',
+        name: 'Company Incorporation',
+        description: 'Register your business as Private Limited, LLP, OPC, or Partnership firm with complete documentation.',
         category: 'Company Registration',
-        price: 9999,
-        estimatedDuration: '7-14 days',
+        price: 6999,
+        processingTime: '7-14 days',
         features: [
-          'Name approval assistance',
-          'Documentation preparation',
-          'ROC filing',
-          'Certificate of Incorporation'
+          'Private Limited Company',
+          'Limited Liability Partnership (LLP)',
+          'One Person Company (OPC)',
+          'Partnership Firm',
+          'Sole Proprietorship',
+          'Complete documentation support'
         ],
         requiredDocuments: [
           'PAN Card of Directors',
@@ -65,120 +48,180 @@ const seedData = async () => {
         isActive: true
       },
       {
-        name: 'GST Registration',
-        description: 'Quick and hassle-free GST registration for your business with complete documentation support.',
-        category: 'GST Services',
-        price: 2999,
-        estimatedDuration: '5-7 days',
+        name: 'Annual Compliance',
+        description: 'Stay compliant with all regulatory requirements. ROC filings, GST returns, IT returns, and more.',
+        category: 'Compliance',
+        price: 3999,
+        processingTime: 'Ongoing/year',
         features: [
-          'GST registration filing',
-          'Documentation support',
-          'GSTIN certificate',
-          'Post-registration support'
+          'ROC Annual Filings',
+          'GST Return Filing',
+          'Income Tax Returns',
+          'TDS Returns',
+          'Audit Reports',
+          'DIN & DSC Services'
+        ],
+        requiredDocuments: [
+          'Company Registration Details',
+          'Financial Statements',
+          'Previous Returns',
+          'Bank Statements'
+        ],
+        isActive: true
+      },
+      {
+        name: 'Legal Litigation',
+        description: 'Expert legal representation for civil, criminal, corporate, and property disputes.',
+        category: 'Legal Consultation',
+        price: 2999,
+        processingTime: 'Case dependent',
+        features: [
+          'Civil Litigation',
+          'Criminal Cases',
+          'Corporate Disputes',
+          'Property Matters',
+          'Family Law',
+          'Consumer Court Cases'
+        ],
+        requiredDocuments: [
+          'Case Details',
+          'Relevant Documents',
+          'Previous Court Orders (if any)',
+          'ID Proof'
+        ],
+        isActive: true
+      },
+      {
+        name: 'Tender Tie-Up',
+        description: 'Complete support for government tenders, including registration, bidding, and documentation.',
+        category: 'Other',
+        price: 0, // Custom pricing
+        processingTime: 'Project based',
+        features: [
+          'Tender Registration',
+          'Bid Preparation',
+          'Document Support',
+          'GeM Registration',
+          'EMD & Bank Guarantee',
+          'Performance Bank Guarantee'
+        ],
+        requiredDocuments: [
+          'Company Registration',
+          'GST Certificate',
+          'PAN Card',
+          'Bank Account Details',
+          'Project Experience Documents'
+        ],
+        isActive: true
+      },
+      {
+        name: 'FSSAI Registration',
+        description: 'Food license registration and renewal for restaurants, food trucks, and food product manufacturers.',
+        category: 'Other',
+        price: 1499,
+        processingTime: '15-30 days',
+        features: [
+          'Basic FSSAI Registration',
+          'State License',
+          'Central License',
+          'FosCos Compliance',
+          'Hygiene Rating',
+          'Annual Returns'
+        ],
+        requiredDocuments: [
+          'Business Proof',
+          'ID and Address Proof',
+          'Food Category Details',
+          'List of Food Products'
+        ],
+        isActive: true
+      },
+      {
+        name: 'Shop & Establishment',
+        description: 'Mandatory registration for shops, commercial establishments, and offices under state laws.',
+        category: 'Other',
+        price: 2499,
+        processingTime: '7-10 days',
+        features: [
+          'New Registration',
+          'License Renewal',
+          'Amendment in Details',
+          'Closure Intimation',
+          'Compliance Maintenance',
+          'Labor Law Advisory'
+        ],
+        requiredDocuments: [
+          'Business Address Proof',
+          'Owner ID Proof',
+          'Employee Details',
+          'Rent Agreement'
+        ],
+        isActive: true
+      },
+      {
+        name: 'MSME / Udyam Registration',
+        description: 'Get your business registered under MSME to avail government benefits and subsidies.',
+        category: 'Other',
+        price: 999,
+        processingTime: '1-3 days',
+        features: [
+          'Udyam Registration',
+          'Udyog Aadhar Update',
+          'MSME Databank',
+          'Priority Sector Lending',
+          'Subsidy Schemes',
+          'Delayed Payment Protection'
+        ],
+        requiredDocuments: [
+          'Aadhaar Card',
+          'PAN Card',
+          'Business Details',
+          'Bank Account Details'
+        ],
+        isActive: true
+      },
+      {
+        name: 'Digital Signature (DSC)',
+        description: 'Class 3 Digital Signature Certificates for e-tendering, ROC filing, and GST filing.',
+        category: 'Other',
+        price: 1999,
+        processingTime: 'Same day',
+        features: [
+          'Class 3 Signing',
+          'Class 3 Signing + Encryption',
+          'DGFT DSC',
+          'Token Inclusion',
+          'Paperless Process',
+          'Same Day Issuance'
         ],
         requiredDocuments: [
           'PAN Card',
           'Aadhaar Card',
-          'Business address proof',
-          'Bank account details',
-          'Photograph'
+          'Photograph',
+          'Email & Mobile'
         ],
         isActive: true
       },
       {
-        name: 'Trademark Registration',
-        description: 'Protect your brand with trademark registration and get exclusive rights to your brand name/logo.',
-        category: 'Trademark & IPR',
-        price: 7999,
-        estimatedDuration: '12-18 months',
+        name: 'Import Export Code (IEC)',
+        description: 'IEC registration for businesses looking to import or export goods and services.',
+        category: 'Other',
+        price: 2999,
+        processingTime: '7-10 days',
         features: [
-          'Trademark search',
-          'Application filing',
-          'Objection handling',
-          'Registration certificate'
+          'New IEC Application',
+          'IEC Modification',
+          'RCMC Registration',
+          'Export Promotion Schemes',
+          'Customs Compliance',
+          'AD Code Registration'
         ],
         requiredDocuments: [
-          'Trademark logo/wordmark',
-          'Applicant ID proof',
-          'Business details',
-          'Power of attorney'
-        ],
-        isActive: true
-      },
-      {
-        name: 'Legal Notice Drafting',
-        description: 'Professional legal notice drafting and sending service for various legal disputes.',
-        category: 'Legal Notice',
-        price: 2499,
-        estimatedDuration: '2-3 days',
-        features: [
-          'Professional notice drafting',
-          'Legal review',
-          'Dispatch via registered post',
-          'Proof of delivery'
-        ],
-        requiredDocuments: [
-          'Details of the dispute',
-          'Supporting documents',
-          'Recipient details'
-        ],
-        isActive: true
-      },
-      {
-        name: 'GST Return Filing',
-        description: 'Monthly/Quarterly GST return filing service with complete accuracy and on-time submission.',
-        category: 'GST Services',
-        price: 1499,
-        estimatedDuration: '3-5 days',
-        features: [
-          'GSTR-1, GSTR-3B filing',
-          'Input tax credit reconciliation',
-          'Error-free filing',
-          'Acknowledgment copy'
-        ],
-        requiredDocuments: [
-          'GST credentials',
-          'Sales and purchase invoices',
-          'Previous returns'
-        ],
-        isActive: true
-      },
-      {
-        name: 'Partnership Deed Drafting',
-        description: 'Comprehensive partnership deed drafting service for new or existing partnerships.',
-        category: 'Contract Drafting',
-        price: 4999,
-        estimatedDuration: '3-5 days',
-        features: [
-          'Customized deed drafting',
-          'Legal compliance check',
-          'Notarization support',
-          'Digital copy'
-        ],
-        requiredDocuments: [
-          'Partner details',
-          'Business details',
-          'Capital contribution details'
-        ],
-        isActive: true
-      },
-      {
-        name: 'Property Document Verification',
-        description: 'Complete property document verification to ensure clear title and legal ownership.',
-        category: 'Property Documentation',
-        price: 5999,
-        estimatedDuration: '7-10 days',
-        features: [
-          'Title search',
-          'Document verification',
-          'Legal opinion',
-          'Detailed report'
-        ],
-        requiredDocuments: [
-          'Property documents',
-          'Sale deed',
-          'Previous ownership records',
-          'Property tax receipts'
+          'PAN Card',
+          'Aadhaar Card',
+          'Business Proof',
+          'Bank Certificate',
+          'Cancelled Cheque'
         ],
         isActive: true
       }
