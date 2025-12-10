@@ -7,7 +7,9 @@ const Form = require('../models/Form');
 // @access  Private
 exports.createApplication = async (req, res) => {
   try {
-    const { serviceId, formData } = req.body;
+    const { serviceId, additionalInfo, contactPhone, contactEmail } = req.body;
+
+    console.log('Create application request:', { serviceId, userId: req.user.id });
 
     // Verify service exists
     const service = await Service.findById(serviceId);
@@ -28,7 +30,12 @@ exports.createApplication = async (req, res) => {
     const application = await Application.create({
       user: req.user.id,
       service: serviceId,
-      formData: JSON.parse(formData || '{}'),
+      amount: service.price,
+      formData: {
+        additionalInfo,
+        contactPhone,
+        contactEmail
+      },
       documents,
       statusHistory: [{
         status: 'pending',
@@ -39,13 +46,16 @@ exports.createApplication = async (req, res) => {
 
     await application.populate('service', 'name category price');
 
+    console.log('Application created:', application._id);
+
     res.status(201).json({
       success: true,
       message: 'Application submitted successfully',
-      referenceNumber: application.referenceNumber,
+      applicationNumber: application.applicationNumber,
       application
     });
   } catch (error) {
+    console.error('Error creating application:', error);
     res.status(500).json({
       success: false,
       message: 'Error creating application',
@@ -97,6 +107,8 @@ exports.trackApplication = async (req, res) => {
 
 // @desc    Get single application
 // @route   GET /api/applications/:id
+// @desc    Get single application by ID
+// @route   GET /api/applications/:id
 // @access  Private
 exports.getApplication = async (req, res) => {
   try {
@@ -131,6 +143,30 @@ exports.getApplication = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error fetching application',
+      error: error.message
+    });
+  }
+};
+
+// @desc    Get current user's applications
+// @route   GET /api/applications/my-applications
+// @access  Private
+exports.getUserApplications = async (req, res) => {
+  try {
+    const applications = await Application.find({ user: req.user.id })
+      .populate('service', 'name category price')
+      .sort('-createdAt');
+
+    res.json({
+      success: true,
+      count: applications.length,
+      applications
+    });
+  } catch (error) {
+    console.error('Error fetching user applications:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching applications',
       error: error.message
     });
   }

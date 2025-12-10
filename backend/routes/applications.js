@@ -7,6 +7,9 @@ const upload = require('../middleware/upload');
 // Create application
 router.post('/', protect, upload.array('documents', 10), applicationController.createApplication);
 
+// Get current user's applications
+router.get('/my-applications', protect, applicationController.getUserApplications);
+
 // Get application by reference number
 router.get('/track/:referenceNumber', protect, applicationController.trackApplication);
 
