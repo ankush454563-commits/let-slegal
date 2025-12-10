@@ -30,7 +30,6 @@ exports.createApplication = async (req, res) => {
     const application = await Application.create({
       user: req.user.id,
       service: serviceId,
-      amount: service.price,
       formData: {
         additionalInfo,
         contactPhone,
@@ -51,7 +50,7 @@ exports.createApplication = async (req, res) => {
     res.status(201).json({
       success: true,
       message: 'Application submitted successfully',
-      applicationNumber: application.applicationNumber,
+      referenceNumber: application.referenceNumber,
       application
     });
   } catch (error) {
