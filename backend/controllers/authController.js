@@ -16,16 +16,21 @@ exports.register = async (req, res) => {
 
   try {
     const { name, email, password, phone } = req.body;
+    
+    console.log('Registration attempt:', { name, email, phone });
 
     // Check if user exists
     const userExists = await User.findOne({ email });
     if (userExists) {
+      console.log('User already exists:', email);
       return res.status(400).json({
         success: false,
         message: 'User already exists with this email'
       });
     }
 
+    console.log('Creating new user...');
+    
     // Create user
     const user = await User.create({
       name,
@@ -33,6 +38,8 @@ exports.register = async (req, res) => {
       password,
       phone
     });
+    
+    console.log('User created successfully:', user._id);
 
     // Generate token
     const token = generateToken(user._id);

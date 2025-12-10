@@ -74,6 +74,25 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Test database connection
+app.get('/api/test-db', async (req, res) => {
+  try {
+    const User = require('./models/User');
+    const count = await User.countDocuments();
+    res.json({
+      success: true,
+      mongodb: 'connected',
+      usersCount: count
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      mongodb: 'error',
+      error: error.message
+    });
+  }
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
