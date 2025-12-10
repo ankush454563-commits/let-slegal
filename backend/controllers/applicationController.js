@@ -9,7 +9,19 @@ exports.createApplication = async (req, res) => {
   try {
     const { serviceId, additionalInfo, contactPhone, contactEmail } = req.body;
 
-    console.log('Create application request:', { serviceId, userId: req.user.id });
+    console.log('Create application request:', { 
+      serviceId, 
+      userId: req.user?.id,
+      user: req.user,
+      body: req.body 
+    });
+
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated'
+      });
+    }
 
     // Verify service exists
     const service = await Service.findById(serviceId);
@@ -55,10 +67,12 @@ exports.createApplication = async (req, res) => {
     });
   } catch (error) {
     console.error('Error creating application:', error);
+    console.error('Error stack:', error.stack);
     res.status(500).json({
       success: false,
       message: 'Error creating application',
-      error: error.message
+      error: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 };
