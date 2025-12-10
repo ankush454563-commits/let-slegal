@@ -1,6 +1,7 @@
 const Application = require('../models/Application');
 const Service = require('../models/Service');
 const Form = require('../models/Form');
+const mongoose = require('mongoose');
 
 // @desc    Create application
 // @route   POST /api/applications
@@ -20,6 +21,14 @@ exports.createApplication = async (req, res) => {
       return res.status(401).json({
         success: false,
         message: 'User not authenticated'
+      });
+    }
+
+    // Validate serviceId
+    if (!serviceId || !mongoose.Types.ObjectId.isValid(serviceId)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or missing service ID'
       });
     }
 
