@@ -22,7 +22,7 @@ import {
   Pending,
   AttachMoney,
 } from '@mui/icons-material';
-import api from '../config/api';
+import api from '../../config/api';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({

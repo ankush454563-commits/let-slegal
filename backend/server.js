@@ -66,7 +66,12 @@ app.use('/api/admin', adminRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: "Let'sLegal API is running" });
+  res.json({ 
+    status: 'OK', 
+    message: "Let'sLegal API is running",
+    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    environment: process.env.NODE_ENV || 'development'
+  });
 });
 
 // Error handling middleware

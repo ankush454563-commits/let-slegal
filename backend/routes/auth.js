@@ -8,7 +8,7 @@ router.post('/register', [
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('email').isEmail().withMessage('Valid email is required'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
-  body('phone').matches(/^[0-9]{10}$/).withMessage('Valid 10-digit phone number is required')
+  body('phone').trim().notEmpty().withMessage('Phone number is required')
 ], authController.register);
 
 // Login
